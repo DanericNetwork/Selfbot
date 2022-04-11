@@ -102,6 +102,15 @@ async def btc(ctx):
     await ctx.send(content="Bitcoin price in USD: $" + str(usd) + "\nBitcoin price in EUR: €" + str(eur), delete_after=config.delete_after)
 
 @bot.command()
+async def eth(ctx):
+    await ctx.message.delete()
+    r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR')
+    r = r.json()
+    usd = r['USD']
+    eur = r['EUR']
+    await ctx.send(content="Etherium price in USD: $" + str(usd) + "\nEtherium price in EUR: €" + str(eur), delete_after=config.delete_after)
+
+@bot.command()
 async def commands(ctx):
     await ctx.message.delete()
     text = "Commands:\n"
