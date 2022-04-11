@@ -39,7 +39,7 @@ config = Configuration.load_json("config.json")
 
 print("[+] Loading Selfbot...")
 
-bot = Bot(">", self_bot=True)
+bot = Bot(config.prefix, self_bot=True)
 
 @bot.event
 async def on_ready():
@@ -54,6 +54,6 @@ async def btc(ctx):
     r = r.json()
     usd = r['USD']
     eur = r['EUR']
-    await ctx.send(content="Bitcoin price in USD: $" + str(usd) + "\nBitcoin price in EUR: €" + str(eur), delete_after=10)
+    await ctx.send(content="Bitcoin price in USD: $" + str(usd) + "\nBitcoin price in EUR: €" + str(eur), delete_after=config.delete_after)
 
 bot.run(config.token, bot=False)
