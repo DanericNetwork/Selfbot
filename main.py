@@ -1,6 +1,7 @@
 import json
-import discord.ext as commands
-from discord.ext.commands import Bot
+from discord.ext import commands
+from discord.ext.commands import Bot, Cog, Context, CommandNotFound
+from discord.ext.commands.core import command
 import discord
 from discord_slash.utils.manage_components import ComponentContext, create_actionrow, create_button, create_select, create_select_option
 from discord_slash.model import ButtonStyle
@@ -81,7 +82,15 @@ async def on_ready():
     bot.remove_command("help")
     activity = discord.Game(name="Fortnite Battle Pass", type=3)
     await bot.change_presence(status=discord.Status.idle, activity=activity)
-    print(s.dsblue + " Logged in as " + Fore.YELLOW + bot.user.name + "#" + bot.user.discriminator)
+    print(s.dsblue + " Logged in as " + Fore.YELLOW + bot.user.name + "#" + bot.user.discriminator + Fore.WHITE + Style.BRIGHT)
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        c = ctx.message.content.split(' ')[0].replace(config.prefix, "")
+        print(s.dred + f"Command not found: {c}")
+        return
+    raise error
 
 @bot.command()
 async def btc(ctx):
