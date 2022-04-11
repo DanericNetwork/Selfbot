@@ -92,4 +92,12 @@ async def btc(ctx):
     eur = r['EUR']
     await ctx.send(content="Bitcoin price in USD: $" + str(usd) + "\nBitcoin price in EUR: €" + str(eur), delete_after=config.delete_after)
 
+@bot.command()
+async def commands(ctx):
+    await ctx.message.delete()
+    text = "Commands:\n"
+    for command in bot.commands:
+        text += "`" + command.name + "`, "
+    await ctx.send(content=text, delete_after=config.delete_after)
+
 bot.run(config.token, bot=False)
