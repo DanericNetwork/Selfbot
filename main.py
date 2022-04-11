@@ -92,7 +92,7 @@ async def on_command_error(ctx, error):
         return
     raise error
 
-@bot.command()
+@bot.command(usage='<text>')
 async def btc(ctx):
     await ctx.message.delete()
     r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,EUR')
@@ -101,7 +101,7 @@ async def btc(ctx):
     eur = r['EUR']
     await ctx.send(content="Bitcoin price in USD: $" + str(usd) + "\nBitcoin price in EUR: €" + str(eur), delete_after=config.delete_after)
 
-@bot.command()
+@bot.command(usage='<text>')
 async def eth(ctx):
     await ctx.message.delete()
     r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR')
@@ -118,7 +118,26 @@ async def commands(ctx):
         text += "`" + command.name + "`, "
     await ctx.send(content=text, delete_after=config.delete_after)
 
-@bot.command(name='auto-text', aliases=['text'])
+@bot.command()
+async def info(ctx, command: str = None):
+    await ctx.message.delete()
+    if command is None:
+        text = "Info:\n"
+        for command in bot.commands:
+            text += "`" + command.name + "`, "
+        await ctx.send(content=text, delete_after=config.delete_after)
+    else:
+        command = bot.get_command(command)
+        if command is None:
+            await ctx.send(content="Command not found", delete_after=config.delete_after)
+        else:
+            text = "Info:\n"
+            text += "`" + command.name + "`\n"
+            text += "Usage: " + command.usage + "\n"
+            text += "Description: " + command.description + "\n"
+            await ctx.send(content=text, delete_after=config.delete_after)
+
+@bot.command(name='auto-text', aliases=['text'], description='Auto-text', usage='<channelid> <text> <interval> <maxinterval>')
 async def _auto_text(ctx, channel: discord.TextChannel, text: str, duration: int, max_duration: int):
     await ctx.message.delete()
     count = 0
