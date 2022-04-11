@@ -137,15 +137,15 @@ async def info(ctx, command: str = None):
             text += "Description: " + command.description + "\n"
             await ctx.send(content=text, delete_after=config.delete_after)
 
-@bot.command(name='auto-text', aliases=['text'], description='Auto-text', usage='<channelid> <text> <interval> <maxinterval>')
+@bot.command(name='auto-text', aliases=['text'], description='Auto-text use underscore for spaces', usage='<channelid> <text> <interval> <maxinterval>')
 async def _auto_text(ctx, channel: discord.TextChannel, text: str, duration: int, max_duration: int):
     await ctx.message.delete()
     count = 0
     while True:
         try:
             count += 1
-            await channel.send(text)
-            print(s.space+f'{Fore.GREEN}[AUTO-TEXT]{Style.RESET_ALL} {count} texts sent.'+Fore.RESET)
+            await channel.send(text.replace("_", " "))
+            print(s.space+f'{Fore.GREEN}[AUTO-TEXT]{Style.RESET_ALL} {count}x "{text.replace("_", " ")}" sent.'+Fore.RESET)
             await asyncio.sleep(random.randint(duration, max_duration))
         except Exception as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
