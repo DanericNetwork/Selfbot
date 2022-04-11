@@ -5,6 +5,30 @@ import discord
 from discord_slash.utils.manage_components import ComponentContext, create_actionrow, create_button, create_select, create_select_option
 from discord_slash.model import ButtonStyle
 import requests
+from colorama import init, Fore, Back, Style
+import os
+import time
+
+class s():
+    space = " " * 2
+    # SECTION SIGN MARKS (LIGHT)
+    sred = Style.BRIGHT + "[" + Fore.RED + " \u00a7 " + Fore.WHITE + "] "
+    sblue = Style.BRIGHT + "[" + Fore.BLUE + " \u00a7 " + Fore.WHITE + "] "
+    # EXCLAMATION MARKS (LIGHT)
+    red = Style.BRIGHT + "[" + Fore.RED + " ! " + Fore.WHITE + "] "
+    blue = Style.BRIGHT + "[" + Fore.BLUE + " ! " + Fore.WHITE + "] "
+    # QUESTION MARKS (LIGHT)
+    qred = Style.BRIGHT + "[" + Fore.RED + " ? " + Fore.WHITE + "] "
+    qblue = Style.BRIGHT + "[" + Fore.BLUE + " ? " + Fore.WHITE + "] "
+    # EXLAMATION MARKS (DARK)
+    dred = Style.BRIGHT + "[" + Style.RESET_ALL + Fore.RED + " ! " + Fore.WHITE + Style.BRIGHT + "] "
+    dblue = Style.BRIGHT + "[" + Style.RESET_ALL + Fore.BLUE + " ! " + Fore.WHITE + Style.BRIGHT + "] "
+    # QUESTION MARKS (DARK)
+    dqred = Style.BRIGHT + "[" + Style.RESET_ALL + Fore.RED + " ? " + Fore.WHITE + Style.BRIGHT + "] "
+    dqblue = Style.BRIGHT + "[" + Style.RESET_ALL + Fore.BLUE + " ? " + Fore.WHITE + Style.BRIGHT + "] "
+    # SECTION SIGN MARKS (DARK)
+    dsred = Style.BRIGHT + "[" + Style.RESET_ALL + Fore.RED + " \u00a7 " + Fore.WHITE + Style.BRIGHT + "] "
+    dsblue = Style.BRIGHT + "[" + Style.RESET_ALL + Fore.BLUE + " \u00a7 " + Fore.WHITE + Style.BRIGHT + "] "
 
 class Dict(dict):
     """dot.notation access to dictionary attributes"""
@@ -37,15 +61,27 @@ class Configuration(object):
 
 config = Configuration.load_json("config.json")
 
-print("[+] Loading Selfbot...")
+# Load selfbot
+os.system('cls')
+print("\n\n\n\n\n")
+print(s.dsred + Style.BRIGHT + "Loading selfbot...")
+time.sleep(1)
+print("\n\n\n\n\n")
+print(Fore.BLUE +" ██████╗███████╗███╗   ██╗██████╗ ██╗ ██████╗ ")
+print("██╔════╝██╔════╝████╗  ██║██╔══██╗██║██╔═══██╗")
+print("██║     █████╗  ██╔██╗ ██║██████╔╝██║██║   ██║")
+print("██║     ██╔══╝  ██║╚██╗██║██╔══██╗██║██║   ██║")
+print("╚██████╗███████╗██║ ╚████║██║  ██║██║╚██████╔╝")
+print(" ╚═════╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚═════╝ " + Fore.WHITE + Style.BRIGHT)
 
-bot = Bot(config.prefix, self_bot=True)
+bot = Bot(config.prefix, help_command=None, self_bot=True)
 
 @bot.event
 async def on_ready():
+    bot.remove_command("help")
     activity = discord.Game(name="Fortnite Battle Pass", type=3)
     await bot.change_presence(status=discord.Status.idle, activity=activity)
-    print("[+] Selfbot loaded!")
+    print(s.dsblue + " Logged in as " + Fore.YELLOW + bot.user.name + "#" + bot.user.discriminator)
 
 @bot.command()
 async def btc(ctx):
