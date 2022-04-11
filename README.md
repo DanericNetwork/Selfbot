@@ -1,4 +1,4 @@
-# Selfbot
+# Xenrio Selfbot
 This is a Selfbot made for educational purposes.
 
 *Use at your own risk.*
