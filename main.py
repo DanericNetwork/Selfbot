@@ -3,12 +3,12 @@ from discord.ext import commands
 from discord.ext.commands import Bot, Cog, Context, CommandNotFound
 from discord.ext.commands.core import command
 import discord
-from discord_slash.utils.manage_components import ComponentContext, create_actionrow, create_button, create_select, create_select_option
-from discord_slash.model import ButtonStyle
 import requests
 from colorama import init, Fore, Back, Style
 import os
 import time
+import asyncio
+import random
 
 class s():
     space = " " * 2
@@ -68,12 +68,12 @@ print("\n\n\n\n\n")
 print(s.dsred + Style.BRIGHT + "Loading selfbot...")
 time.sleep(1)
 print("\n\n\n\n\n")
-print(Fore.BLUE +"██╗  ██╗███████╗███╗   ██╗██████╗ ██╗ ██████╗ ")
-print("╚██╗██╔╝██╔════╝████╗  ██║██╔══██╗██║██╔═══██╗")
-print(" ╚███╔╝ █████╗  ██╔██╗ ██║██████╔╝██║██║   ██║")
-print(" ██╔██╗ ██╔══╝  ██║╚██╗██║██╔══██╗██║██║   ██║")
-print("██╔╝ ██╗███████╗██║ ╚████║██║  ██║██║╚██████╔╝")
-print("╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚═════╝ " + Fore.WHITE + Style.BRIGHT)
+print(Fore.BLUE + "██╗  ██╗███████╗███╗   ██╗██████╗ ██╗ ██████╗ ")
+print(Fore.BLUE + "╚██╗██╔╝██╔════╝████╗  ██║██╔══██╗██║██╔═══██╗")
+print(Fore.BLUE + " ╚███╔╝ █████╗  ██╔██╗ ██║██████╔╝██║██║   ██║")
+print(Fore.BLUE + " ██╔██╗ ██╔══╝  ██║╚██╗██║██╔══██╗██║██║   ██║")
+print(Fore.BLUE + "██╔╝ ██╗███████╗██║ ╚████║██║  ██║██║╚██████╔╝")
+print(Fore.BLUE + "╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚═════╝ " + Fore.WHITE + Style.BRIGHT)
 
 bot = Bot(config.prefix, help_command=None, self_bot=True)
 
@@ -117,5 +117,18 @@ async def commands(ctx):
     for command in bot.commands:
         text += "`" + command.name + "`, "
     await ctx.send(content=text, delete_after=config.delete_after)
+
+@bot.command(name='auto-bump', aliases=['bump', 'autobump'])
+async def _auto_bump(ctx, channel: discord.TextChannel):
+    await ctx.message.delete()
+    count = 0
+    while True:
+        try:
+            count += 1
+            await channel.send('!d bump')
+            print(s.space+f'{Fore.GREEN}[AUTO-BUMP]{Style.RESET_ALL} {count} bumps sent.'+Fore.RESET)
+            await asyncio.sleep(random.randint(7200, 7260))
+        except Exception as e:
+            print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
 bot.run(config.token, bot=False)
