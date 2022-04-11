@@ -113,7 +113,7 @@ async def eth(ctx):
     r = r.json()
     usd = r['USD']
     eur = r['EUR']
-    await ctx.send(content="Etherium price in USD: $" + str(usd) + "\nEtherium price in EUR: €" + str(eur), delete_after=config.delete_after)
+    await ctx.send(content="> Etherium\n>   ╠ USD: $" + str(usd) + "\n>   ╚ EUR: €" + str(eur), delete_after=config.delete_after)
 
 @bot.command()
 async def commands(ctx):
