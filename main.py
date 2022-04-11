@@ -66,16 +66,21 @@ config = Configuration.load_json("config.json")
 os.system('cls')
 print("\n\n\n\n\n")
 print(s.dsred + Style.BRIGHT + "Loading selfbot...")
+bot = Bot(config.prefix, help_command=None, self_bot=True)
+
 time.sleep(1)
 print("\n\n\n\n\n")
-print(Fore.BLUE + "██╗  ██╗███████╗███╗   ██╗██████╗ ██╗ ██████╗ ")
-print(Fore.BLUE + "╚██╗██╔╝██╔════╝████╗  ██║██╔══██╗██║██╔═══██╗")
-print(Fore.BLUE + " ╚███╔╝ █████╗  ██╔██╗ ██║██████╔╝██║██║   ██║")
-print(Fore.BLUE + " ██╔██╗ ██╔══╝  ██║╚██╗██║██╔══██╗██║██║   ██║")
-print(Fore.BLUE + "██╔╝ ██╗███████╗██║ ╚████║██║  ██║██║╚██████╔╝")
-print(Fore.BLUE + "╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚═════╝ " + Fore.WHITE + Style.BRIGHT)
+print(f'''        {Fore.BLUE}╔════════════════════════════════════════════════╗
+        {Fore.BLUE}║ ██╗  ██╗███████╗███╗   ██╗██████╗ ██╗ ██████╗  ║
+        {Fore.BLUE}║ ╚██╗██╔╝██╔════╝████╗  ██║██╔══██╗██║██╔═══██╗ ║
+        {Fore.BLUE}║  ╚███╔╝ █████╗  ██╔██╗ ██║██████╔╝██║██║   ██║ ║
+        {Fore.BLUE}║  ██╔██╗ ██╔══╝  ██║╚██╗██║██╔══██╗██║██║   ██║ ║
+        {Fore.BLUE}║ ██╔╝ ██╗███████╗██║ ╚████║██║  ██║██║╚██████╔╝ ║
+        {Fore.BLUE}║ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚═════╝  ║
+        {Fore.BLUE}╚════════════════════════════════════════════════╝
+        {Fore.RESET}Xenrio's prefix: {Fore.BLUE}{config.prefix}{Fore.RESET}, for help type {Fore.BLUE}{config.prefix}commands{Fore.RESET}
+''' + Fore.RESET)
 
-bot = Bot(config.prefix, help_command=None, self_bot=True)
 
 @bot.event
 async def on_ready():
