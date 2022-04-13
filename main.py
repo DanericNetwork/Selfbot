@@ -143,6 +143,17 @@ async def info(ctx, command: str = None):
             text += "Description: " + command.description + "\n"
             await ctx.send(content=text, delete_after=config.delete_after)
 
+
+
+@bot.command(name='utility', description='Fun commands', usage='<text>')
+async def utility(ctx):
+    await ctx.message.delete()
+    text = f'''**Utility commands:**
+    `{prefix}utility` - Shows this message
+    `{prefix}passwordgen [lenght]` - Generate a password
+    '''
+    await ctx.send(content=text, delete_after=config.delete_after)
+
 @bot.command(name='passwordgen', description='Generate a password')
 async def passwordgen(ctx, length: int):
     await ctx.message.delete()
