@@ -61,6 +61,7 @@ class Configuration(object):
         return result
 
 config = Configuration.load_json("config.json")
+prefix = config.prefix
 
 # Load selfbot
 os.system('cls')
