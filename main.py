@@ -79,8 +79,7 @@ print(f'''        {Fore.BLUE}╔════════════════
         {Fore.BLUE}║ ██╔╝ ██╗███████╗██║ ╚████║██║  ██║██║╚██████╔╝ ║
         {Fore.BLUE}║ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝ ╚═════╝  ║
         {Fore.BLUE}╚════════════════════════════════════════════════╝
-        {Fore.RESET}Xenrio's prefix: {Fore.BLUE}{config.prefix}{Fore.RESET}, for help type {Fore.BLUE}{config.prefix}commands{Fore.RESET}
-''' + Fore.RESET)
+        {Fore.RESET}Xenrio's prefix: {Fore.BLUE}{config.prefix}{Fore.RESET}, for help type {Fore.BLUE}{config.prefix}commands{Fore.RESET}''' + Fore.RESET)
 
 
 @bot.event
@@ -174,5 +173,6 @@ async def _auto_text(ctx, channel: discord.TextChannel, text: str, duration: int
         except Exception as e:
             print(f"{Fore.RED}[ERROR]: {Fore.YELLOW}{e}"+Fore.RESET)
 
-
+print(f'''        Loaded  {Fore.BLUE}{len(bot.commands)} {Fore.RESET}commands
+''')
 bot.run(config.token, bot=False)
