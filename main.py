@@ -143,6 +143,13 @@ async def info(ctx, command: str = None):
             text += "Description: " + command.description + "\n"
             await ctx.send(content=text, delete_after=config.delete_after)
 
+@bot.command(name='passwordgen', description='Generate a password')
+async def passwordgen(ctx, length: int):
+    await ctx.message.delete()
+    letters = "ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz1234567890!@#$%^&*[]:;"
+    passw = ''.join(random.choice(letters) for i in range(length))
+    await ctx.send("> Password Gen: \n||`{}`||".format(passw), delete_after=15)
+
 @bot.command(name='auto-text', aliases=['text'], description='Auto-text use underscore for spaces', usage='<channelid> <text> <interval> <maxinterval>')
 async def _auto_text(ctx, channel: discord.TextChannel, text: str, duration: int, max_duration: int):
     await ctx.message.delete()
